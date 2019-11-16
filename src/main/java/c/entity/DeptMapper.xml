@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="c.entity.Dept">
+
+	<!-- 开启二级缓存
+		eviction: 进出方式
+		size: 二级缓存中存储的数量
+
+		FIFO 表示 first in first out
+	 -->
+	<cache eviction="FIFO" size="2"></cache>
+
+	<resultMap type="Dept" id="deptResultMap">
+		<id property="id" column="did"/>
+		
+		<result property="name" column="dname"/>
+		<result property="address" column="address"/>
+
+	</resultMap>
+	
+	
+	
+	<!-- 
+		根据部门id, 查询部门所有信息
+		
+		useCache: 设置是在缓存中查询, 其默认值为true, 表示在缓存中查询.
+			值为false的时候, 就是去数据库查询
+	 --> 
+	<select id="selectDeptByDID" parameterType="int" resultMap="deptResultMap" useCache="true">
+		select did, dname, address from dept where did = #{did}
+	</select>
+
+	<!-- 
+		根据部门名称, 查询部门所有信息
+		
+		useCache: 设置是在缓存中查询, 其默认值为true, 表示在缓存中查询.
+			值为false的时候, 就是去数据库查询
+	 --> 
+	<select id="selectDeptByDName" parameterType="string" resultMap="deptResultMap" useCache="true">
+		select did, dname, address from dept where dname = #{dname}
+	</select>
+
+
+
+
+
+</mapper>

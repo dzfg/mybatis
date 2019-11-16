@@ -1,0 +1,37 @@
+create database mybatis02 character set utf8 collate utf8_bin;
+
+use mybatis02;
+
+create table dept(
+	did int primary key auto_increment,
+	dname varchar(32),
+	address varchar(128)
+);
+
+insert into dept values(null,"财务部","郑州");
+insert into dept values(null,"行政部","商丘");
+insert into dept values(null,"市场部","遵义");
+insert into dept values(null,"研发部","北京");
+
+
+create table emp(
+	id varchar(64) primary key,
+	name varchar(32),
+	gender char(2),
+	salary double,
+	
+	dept_id int
+);
+
+insert into emp values("001","马云","男", 100, 2);
+insert into emp values("002","马斯克","男", 200, 4);
+insert into emp values("003","李彦宏","男", 80, 4);
+insert into emp values("004","马化腾","男", 150, 4);
+insert into emp values("005","刘强东","男", 80, 3);
+insert into emp values("006","董明珠","女", 210, 1);
+insert into emp values("007","陶华碧","女", 123, 2);
+
+
+
+
+

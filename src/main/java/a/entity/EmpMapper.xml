@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a.entity.Emp">
+	<resultMap type="Emp" id="emp">
+		<!-- 主键 -->
+		<id property="id" column="id"/>
+		
+		<!-- 一般属性字段 -->
+		<result property="name" column="name"/>
+		<result property="gender" column="gender"/>
+		<result property="salary" column="salary"/>
+		
+		<!-- 一个员工,只能够在一个部门
+			association 表示对一的关联关系
+			property: 表示实体类中的属性.
+			column: 表示对应的数据库表中的字段.
+			resultMap: 表示这个属性对应的对象与表的映射关系 [命名空间 + resultMap标签中的id值]
+		 -->
+		<association property="dept" column="dept_id" resultMap="a.entity.Dept.dept"></association>
+		
+	</resultMap>
+	
+	<!-- 
+		进行查询操作. 根据员工的名称, 查询其详细信息.
+	 -->
+	 <select id="selectEmpAndDeptByEmpName" parameterType="java.lang.String" resultMap="emp">
+	 	select 
+	 		e.id,e.name,e.gender,e.salary,
+	 		d.id,d.name,d.address
+	 	from emp e inner join dept d 
+	 	on e.dept_id = d.id
+	 	where e.name = #{name}
+	 </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
